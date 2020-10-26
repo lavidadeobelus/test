@@ -1,12 +1,13 @@
 // Version 1.0.1
-// GUI È­¸é
+// commit pull push test í™•ì¸ì¤‘ 
+// GUI í™”ë©´
 import java.awt.Button;
 import java.awt.Frame;
 import java.awt.TextArea;
-// ÀÌº¥Æ® Ã³¸®
+// ì´ë²¤íŠ¸ ì²˜ë¦¬
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// ÀÔÃâ·Â
+// ì…ì¶œë ¥
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,130 +15,130 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-//improt java.neet.*; // TCP ¼ÒÄÏ 
-// TCP ¼ÒÄÏ 
+//improt java.neet.*; // TCP ì†Œì¼“ 
+// TCP ì†Œì¼“ 
 import java.net.ServerSocket;
 import java.net.Socket;
-// Vector Å¬·¡½º
+// Vector í´ë˜ìŠ¤
 import java.util.Vector;
 
 class GUIChatServer extends Frame implements ActionListener {
-	Button btn_ext; // Á¾·á ¹öÆ°
-	TextArea txt_list; // Á¢¼Ó ¸ñ·Ï Ãâ·Â
-	protected Vector list; // Á¢¼ÓÇÑ ¼­¹ö ¸ñ·Ï ÀúÀå
+	Button btn_ext; // ì¢…ë£Œ ë²„íŠ¼
+	TextArea txt_list; // ì ‘ì† ëª©ë¡ ì¶œë ¥
+	protected Vector list; // ì ‘ì†í•œ ì„œë²„ ëª©ë¡ ì €ì¥
 
-	// »ı¼ºÀÚ
+	// ìƒì„±ì
 	public GUIChatServer(String title) {
-		super(title); // Å¸ÀÌÆ²¹Ù¿¡ Ãâ·ÂµÉ ¹®ÀÚ¿­
-		list = new Vector(); // º¤ÅÍ »ı¼º
-		btn_ext = new Button("¼­¹ö Á¾·á"); // ¼­¹ö Á¾·á ¹öÆ° »ı¼º
-		btn_ext.addActionListener(this); // ÀÌº¥Æ® µî·Ï
-		txt_list = new TextArea(); // txt_list »ı¼º
-		add("Center", txt_list); // È­¸é °¡¿îµ¥ txt_list Ãâ·Â
-		add("South", btn_ext); // È­¸é ÇÏ´Ü¿¡ ¼­¹ö Á¾·á ¹öÆ° Ãâ·Â
-		setSize(400, 300); // È­¸é Å©±â ¼³Á¤
-		setVisible(true); // È­¸é Ãâ·Â
-		ServerStart(); // Ã¤ÆÃ ¼­¹ö ½ÃÀÛ
+		super(title); // íƒ€ì´í‹€ë°”ì— ì¶œë ¥ë  ë¬¸ìì—´
+		list = new Vector(); // ë²¡í„° ìƒì„±
+		btn_ext = new Button("ì„œë²„ ì¢…ë£Œ"); // ì„œë²„ ì¢…ë£Œ ë²„íŠ¼ ìƒì„±
+		btn_ext.addActionListener(this); // ì´ë²¤íŠ¸ ë“±ë¡
+		txt_list = new TextArea(); // txt_list ìƒì„±
+		add("Center", txt_list); // í™”ë©´ ê°€ìš´ë° txt_list ì¶œë ¥
+		add("South", btn_ext); // í™”ë©´ í•˜ë‹¨ì— ì„œë²„ ì¢…ë£Œ ë²„íŠ¼ ì¶œë ¥
+		setSize(400, 300); // í™”ë©´ í¬ê¸° ì„¤ì •
+		setVisible(true); // í™”ë©´ ì¶œë ¥
+		ServerStart(); // ì±„íŒ… ì„œë²„ ì‹œì‘
 	}
 
-	// Ã¤ÆÃ ¼­¹ö
+	// ì±„íŒ… ì„œë²„
 	public void ServerStart() {
-		final int port = 5005; // Ã¤ÆÃ ¼­¹ö Æ÷Æ® »ó¼ö ÁöÁ¤
+		final int port = 5005; // ì±„íŒ… ì„œë²„ í¬íŠ¸ ìƒìˆ˜ ì§€ì •
 		try {
-			ServerSocket ss = new ServerSocket(port); // ServerSocket »ı¼º
+			ServerSocket ss = new ServerSocket(port); // ServerSocket ìƒì„±
 			while (true) {
-				Socket client = ss.accept(); // Å¬¶óÀÌ¾ğÆ® Á¢¼Ó ±â´Ù¸²
+				Socket client = ss.accept(); // í´ë¼ì´ì–¸íŠ¸ ì ‘ì† ê¸°ë‹¤ë¦¼
 				txt_list.appendText(client.getInetAddress().getHostAddress() + "\n");
-				ChatHandle ch = new ChatHandle(this, client); // ChatHandle ÃÊ±âÈ­
-				list.addElement(ch); // Å¬¶óÀÌ¾ğÆ® °ü¸® list º¤ÅÍ¿¡ Ãß°¡
-				ch.start(); // ChatHandle ½º·¹µå ½ÃÀÛ
+				ChatHandle ch = new ChatHandle(this, client); // ChatHandle ì´ˆê¸°í™”
+				list.addElement(ch); // í´ë¼ì´ì–¸íŠ¸ ê´€ë¦¬ list ë²¡í„°ì— ì¶”ê°€
+				ch.start(); // ChatHandle ìŠ¤ë ˆë“œ ì‹œì‘
 			}
-		} catch (Exception e) { // ¿¹¿Ü Ã³¸®
+		} catch (Exception e) { // ì˜ˆì™¸ ì²˜ë¦¬
 			System.out.println(e.getMessage());
 		}
 	}
 
-	// ¼­¹ö Á¾·á ¹öÆ°ÀÌ ´­·ÈÀ» ¶§
+	// ì„œë²„ ì¢…ë£Œ ë²„íŠ¼ì´ ëˆŒë ¸ì„ ë•Œ
 	public void actionPerformed(ActionEvent e) {
 		System.exit(0);
 	}
 
-	// ¸Ş½ÃÁö Ãâ·Â ¸Ş¼­µå
+	// ë©”ì‹œì§€ ì¶œë ¥ ë©”ì„œë“œ
 	public void setMsg(String msg) {
-		txt_list.appendText(msg + "\n");// È­¸é¿¡ msg ¸Ş½ÃÁö Ãâ·Â
+		txt_list.appendText(msg + "\n");// í™”ë©´ì— msg ë©”ì‹œì§€ ì¶œë ¥
 	}
 
-	// main ÇÔ¼ö
+	// main í•¨ìˆ˜
 	public static void main(String[] args) {
-		new GUIChatServer("Ã¤ÆÃ ¼­¹ö ");
+		new GUIChatServer("ì±„íŒ… ì„œë²„ ");
 	}
 }
 
-// ChatHandle Å¬·¡½º : Ã¤ÆÃ ¼­¹öÀÇ ½ÇÁúÀûÀÎ ¿ªÇÒ Ã³¸®
+// ChatHandle í´ë˜ìŠ¤ : ì±„íŒ… ì„œë²„ì˜ ì‹¤ì§ˆì ì¸ ì—­í•  ì²˜ë¦¬
 
-class ChatHandle extends Thread { // ½º·¹µå »ó¼Ó
-	GUIChatServer server = null; // GUIChatServer ¸â¹ö º¯¼ö
-	Socket client = null; // Á¢¼ÓÇÑ Å¬¶óÀÌ¾ğÆ®
-	BufferedReader br = null; // ÀĞ¾î¿À±â
-	PrintWriter pw = null; // º¸³»±â
+class ChatHandle extends Thread { // ìŠ¤ë ˆë“œ ìƒì†
+	GUIChatServer server = null; // GUIChatServer ë©¤ë²„ ë³€ìˆ˜
+	Socket client = null; // ì ‘ì†í•œ í´ë¼ì´ì–¸íŠ¸
+	BufferedReader br = null; // ì½ì–´ì˜¤ê¸°
+	PrintWriter pw = null; // ë³´ë‚´ê¸°
 
-	// »ı¼ºÀÚ
+	// ìƒì„±ì
 	public ChatHandle(GUIChatServer server, Socket client) throws IOException {
 		this.server = server;
 		this.client = client;
-		// ÀÔÃâ·Â ½ºÆ®¸² »ı¼º
+		// ì…ì¶œë ¥ ìŠ¤íŠ¸ë¦¼ ìƒì„±
 		InputStream is = client.getInputStream();
 		br = new BufferedReader(new InputStreamReader(is));
 		OutputStream os = client.getOutputStream();
 		pw = new PrintWriter(new OutputStreamWriter(os));
 	}
 
-	// ÇöÀç ¼­¹ö¿¡ Á¢¼ÓÇÑ ¸ğµç Å¬¶óÀÌ¾ğÆ®¿¡ msgÀü¼Û
+	// í˜„ì¬ ì„œë²„ì— ì ‘ì†í•œ ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ì— msgì „ì†¡
 	public void Send_All(String msg) {
 		try {
-			synchronized (server.list) { // GUIChatServer ¸â¹ö º¯¼ö list µ¿±âÈ­ Ã³¸®
-				int size = server.list.size(); // ÇöÀç Á¢¼ÓÇÑ Å¬¶óÀÌ¾ğÆ® ¼ö
+			synchronized (server.list) { // GUIChatServer ë©¤ë²„ ë³€ìˆ˜ list ë™ê¸°í™” ì²˜ë¦¬
+				int size = server.list.size(); // í˜„ì¬ ì ‘ì†í•œ í´ë¼ì´ì–¸íŠ¸ ìˆ˜
 				for (int i = 0; i < size; i++) {
 					ChatHandle chs = (ChatHandle) server.list.elementAt(i);
-					synchronized (chs.pw) { // ChatHandle pw ÀÎ½ºÅÏ½º¸¦ ÀÌ¿ëÇÑ ¹®ÀÚ Àü¼Û
+					synchronized (chs.pw) { // ChatHandle pw ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì´ìš©í•œ ë¬¸ì ì „ì†¡
 						chs.pw.println(msg);
 					}
 					chs.pw.flush();
 				}
 			}
-		} catch (Exception e) { // ¿¹¿Ü Ã³¸®
+		} catch (Exception e) { // ì˜ˆì™¸ ì²˜ë¦¬
 			System.out.println(e.getMessage());
 		}
 	}
 
-	// Thread Å¬·¡½ºÀÇ run ¸Ş¼­µå ¿À¹ö¶óÀÌµù.
+	// Thread í´ë˜ìŠ¤ì˜ run ë©”ì„œë“œ ì˜¤ë²„ë¼ì´ë”©.
 	public void run() {
 		String name = "";
 		try {
-			name = br.readLine(); // ´ëÈ­¸í ÀĞ¾î¿À±â
-			Send_All(name + " ´ÔÀÌ »õ·Î ÀÔÀåÇÏ¼Ì½À´Ï´Ù.");
+			name = br.readLine(); // ëŒ€í™”ëª… ì½ì–´ì˜¤ê¸°
+			Send_All(name + " ë‹˜ì´ ìƒˆë¡œ ì…ì¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
 			while (true) {
-				String msg = br.readLine(); // Å¬¶óÀÌ¾ğÆ® ¸Ş½ÃÁö ´ë±â
+				String msg = br.readLine(); // í´ë¼ì´ì–¸íŠ¸ ë©”ì‹œì§€ ëŒ€ê¸°
 				String str = client.getInetAddress().getHostName();
 				synchronized (server) {
-					server.setMsg(str + " : " + msg); // Á¢¼Ó Å¬¶óÀÌ¾ğÆ® ¸Ş½ÃÁö Ãâ·Â
+					server.setMsg(str + " : " + msg); // ì ‘ì† í´ë¼ì´ì–¸íŠ¸ ë©”ì‹œì§€ ì¶œë ¥
 				}
-				if (msg.equals("@@Exit"))// @@Exit ¸Ş½ÃÁö¸é Å¬¶óÀÌ¾ğÆ® Á¢¼Ó ÇØÁö
+				if (msg.equals("@@Exit"))// @@Exit ë©”ì‹œì§€ë©´ í´ë¼ì´ì–¸íŠ¸ ì ‘ì† í•´ì§€
 					break;
-				else // ÇöÀç Á¢¼ÓÇÑ ¸ğµç Å¬¶óÀÌ¾ğÆ®¿¡ ¸Ş½ÃÁö Àü¼Û
+				else // í˜„ì¬ ì ‘ì†í•œ ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ì— ë©”ì‹œì§€ ì „ì†¡
 					Send_All(name + " >> " + msg);
 			}
-		} catch (Exception e) { // ¿¹¿Ü Ã³¸®
+		} catch (Exception e) { // ì˜ˆì™¸ ì²˜ë¦¬
 			server.setMsg(e.getMessage());
 		} finally {
 			synchronized (server.list) {
-				server.list.removeElement(this); // Á¢¼Ó ¸ñ·Ï¿¡¼­ Á¦°Å
+				server.list.removeElement(this); // ì ‘ì† ëª©ë¡ì—ì„œ ì œê±°
 			}
-			try { // ½ºÆ®¸² ÇØÁö
+			try { // ìŠ¤íŠ¸ë¦¼ í•´ì§€
 				br.close();
 				pw.close();
-				client.close(); // Å¬¶óÀÌ¾ğÆ® Á¢¼Ó ÇØÁö
-			} catch (IOException e) { // ¿¹¿Ü Ã³¸®
+				client.close(); // í´ë¼ì´ì–¸íŠ¸ ì ‘ì† í•´ì§€
+			} catch (IOException e) { // ì˜ˆì™¸ ì²˜ë¦¬
 				server.setMsg(e.getMessage());
 			}
 		}

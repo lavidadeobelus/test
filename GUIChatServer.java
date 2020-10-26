@@ -1,5 +1,6 @@
 // Version 1.0.1
 // commit pull push test222 확인중 
+// 다른 원격저장소에 save 하는 방법
 // GUI 화면
 import java.awt.Button;
 import java.awt.Frame;
